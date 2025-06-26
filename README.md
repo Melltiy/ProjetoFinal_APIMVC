@@ -10,6 +10,6 @@ Link do repositório GitHub:
 https://github.com/Melltiy/ProjetoFinal_APIMVC.git
 
 Front-End
-http://localhost:5209
+http://localhost:5209/Ocorrencia
 
 
