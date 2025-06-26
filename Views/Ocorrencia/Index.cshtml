@@ -1,0 +1,206 @@
+@model List<ApiOcorrenciaMvc.Models.Ocorrencia>
+
+@{
+    ViewData["Title"] = "Lista de Ocorrências";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #E9F6F5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    .sidebar {
+        width: 200px;
+        background-color: #E9F6F5;
+        padding: 20px;
+    }
+
+    .sidebar h3 {
+        color: #1F2D3D;
+    }
+
+    .sidebar select {
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #2C83F5;
+        color: white;
+        font-weight: bold;
+    }
+
+    .main {
+        flex: 1;
+        padding: 40px;
+        background-color: white;
+    }
+
+    h1 {
+        color: #1F2D3D;
+        margin-top: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 14px;
+        border-bottom: 1px solid #f0f0f0;
+        text-align: left;
+    }
+
+    th {
+        background-color: #E9F6F5;
+        color: #1F2D3D;
+    }
+
+    tr:hover {
+        background-color: #f8f8f8;
+    }
+
+    .tag-amarela {
+        background-color: #FDF498;
+        color: #1F2D3D;
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-weight: bold;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .tag-verde {
+        background-color: #C6F7C6;
+        color: #1F2D3D;
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-weight: bold;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .actions button {
+        margin-right: 5px;
+        padding: 8px 14px;
+        background-color: #2C83F5;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .actions button:hover {
+        background-color: #1F2D3D;
+    }
+
+    .topbar {
+        background-color: #2C83F5;
+        color: white;
+        padding: 16px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .topbar h2 {
+        margin: 0;
+    }
+
+    .topbar nav a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .topbar nav a:hover {
+        text-decoration: underline;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #f1f1f1;
+        color: #888;
+        font-size: 14px;
+    }
+</style>
+
+<div class="topbar">
+    <h2>ApiOcorrencia</h2>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Relatórios</a>
+        <a href="#">Configurações</a>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h3>Filtros</h3>
+        <select>
+            <option>Todos os tipos</option>
+        </select>
+    </div>
+
+    <div class="main">
+        <h1>Lista de ocorrências</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.idOcorrencia</td>
+                        <td>@item.dataOcorrencia.ToString("yyyy-MM-dd")</td>
+                        <td>@item.tipoOcorrencia</td>
+                        <td>@item.descricaoOcorrencia</td>
+                        <td>
+                            @if (item.situacao.ToLower() == "aberta")
+                            {
+                                <span class="tag-amarela">Aberta</span>
+                            }
+                            else
+                            {
+                                <span class="tag-verde">Concluída</span>
+                            }
+                        </td>
+                        <td class="actions">
+                            <button>Detalhes</button>
+                            <button>Editar</button>
+                            <button>Excluir</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="footer">
+    <span>About &nbsp;|&nbsp; Terms &nbsp;|&nbsp; Privacy</span>
+</div>
